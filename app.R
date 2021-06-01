@@ -18,7 +18,7 @@ busstop <- read_csv("data\\busstop.csv")
 dong_jwapyo <- read_csv("data\\dong_jwapyo.csv")
 ID_upjong <- read_csv("data\\ID_upjong.csv")
 dong_upjong <- read_csv("data\\dong_upjong.csv")
-corona <- read_csv("data\\월별_코로나_확진자.csv")
+corona <- read_csv("data\\corona.csv")
 
 get_busIDlist <- function(i,j) {
   IDlist <- read_csv(str_c("data\\", monthlist[i], timelist[j], "ID.csv"))
