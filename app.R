@@ -387,14 +387,14 @@ server <- function(input, output) {
   })
   
   output$IDtabledong <- renderTable({
-    ID <- IDtimedong()
+    ID <- str_c("dong", which(dong_jwapyo$dong == IDtimedong())) 
     timebus <- sigantimedong()
     IDtimelist <- get_busIDtime(ID, timebus)
     return(IDtimelist)
   })
   
   output$IDplotdong <- renderPlot({
-    ID <- IDtimedong()
+    ID <- str_c("dong", which(dong_jwapyo$dong == IDtimedong())) 
     timebus <- sigantimedong()
     IDtimelist <- get_busIDtime(ID, timebus)
     p1 <- ggplot(IDtimelist, aes(x=ym(년월), y=승차량)) +
