@@ -45,9 +45,54 @@ get_busIDtime <- function(IDtime, sigantime) {
     IDtimelist2 <- read_csv(str_c("data\\", IDtime[2], ".csv"))
     IDtimelist2 <- IDtimelist2[,c(2+sigantime, 26+sigantime, 50+sigantime)]
     colnames(IDtimelist2) <- c("승차량", "하차량", "유입량")
-    IDtimelist <- IDtimelist1 %>% mutate(승차량 = 승차량 + IDtimelist2$승차량, 
+    IIDtimelist <- IDtimelist1
+    try(IDtimelist <- IDtimelist1 %>% mutate(승차량 = 승차량 + IDtimelist2$승차량, 
+                                                하차량 = 하차량 + IDtimelist2$하차량, 
+                                                유입량 = 유입량 + IDtimelist2$유입량))
+    return(IDtimelist)
+  } else if(length(IDtime) ==3) {
+    cat(IDtime, sigantime, "\n")
+    IDtimelist1 <- read_csv(str_c("data\\", IDtime[1], ".csv"))
+    IDtimelist1 <- IDtimelist1[,c(1, 2+sigantime, 26+sigantime, 50+sigantime)]
+    colnames(IDtimelist1) <- c("년월", "승차량", "하차량", "유입량")
+    IDtimelist2 <- read_csv(str_c("data\\", IDtime[2], ".csv"))
+    IDtimelist2 <- IDtimelist2[,c(2+sigantime, 26+sigantime, 50+sigantime)]
+    colnames(IDtimelist2) <- c("승차량", "하차량", "유입량")
+    IDtimelist3 <- read_csv(str_c("data\\", IDtime[3], ".csv"))
+    IDtimelist3 <- IDtimelist3[,c(2+sigantime, 26+sigantime, 50+sigantime)]
+    colnames(IDtimelist3) <- c("승차량", "하차량", "유입량")
+    IDtimelist <- IDtimelist1
+    try(IDtimelist <- IDtimelist1 %>% mutate(승차량 = 승차량 + IDtimelist2$승차량, 
+                                                하차량 = 하차량 + IDtimelist2$하차량, 
+                                                유입량 = 유입량 + IDtimelist2$유입량))
+    try(IDtimelist <- IDtimelist %>% mutate(승차량 = 승차량 + IDtimelist3$승차량, 
+                                               하차량 = 하차량 + IDtimelist3$하차량, 
+                                               유입량 = 유입량 + IDtimelist3$유입량))
+    return(IDtimelist)
+  } else {
+    cat(IDtime, sigantime, "\n")
+    IDtimelist1 <- read_csv(str_c("data\\", IDtime[1], ".csv"))
+    IDtimelist1 <- IDtimelist1[,c(1, 2+sigantime, 26+sigantime, 50+sigantime)]
+    colnames(IDtimelist1) <- c("년월", "승차량", "하차량", "유입량")
+    IDtimelist2 <- read_csv(str_c("data\\", IDtime[2], ".csv"))
+    IDtimelist2 <- IDtimelist2[,c(2+sigantime, 26+sigantime, 50+sigantime)]
+    colnames(IDtimelist2) <- c("승차량", "하차량", "유입량")
+    IDtimelist3 <- read_csv(str_c("data\\", IDtime[3], ".csv"))
+    IDtimelist3 <- IDtimelist3[,c(2+sigantime, 26+sigantime, 50+sigantime)]
+    colnames(IDtimelist3) <- c("승차량", "하차량", "유입량")
+    IDtimelist4 <- read_csv(str_c("data\\", IDtime[4], ".csv"))
+    IDtimelist4 <- IDtimelist4[,c(2+sigantime, 26+sigantime, 50+sigantime)]
+    colnames(IDtimelist4) <- c("승차량", "하차량", "유입량")
+    IDtimelist <- IDtimelist1
+    try(IDtimelist <- IDtimelist1 %>% mutate(승차량 = 승차량 + IDtimelist2$승차량, 
                                             하차량 = 하차량 + IDtimelist2$하차량, 
-                                            유입량 = 유입량 + IDtimelist2$유입량)
+                                            유입량 = 유입량 + IDtimelist2$유입량))
+    try(IDtimelist <- IDtimelist %>% mutate(승차량 = 승차량 + IDtimelist3$승차량, 
+                                            하차량 = 하차량 + IDtimelist3$하차량, 
+                                            유입량 = 유입량 + IDtimelist3$유입량))
+    try(IDtimelist <- IDtimelist %>% mutate(승차량 = 승차량 + IDtimelist4$승차량, 
+                                            하차량 = 하차량 + IDtimelist4$하차량, 
+                                            유입량 = 유입량 + IDtimelist4$유입량))
     return(IDtimelist)
   }
 }
